@@ -1,5 +1,6 @@
 package com.testautomationlabs.Tests;
 
+import com.testautomationlabs.Model.CheckboxesPage;
 import com.testautomationlabs.Model.LandingPage;
 import com.testautomationlabs.Model.LoginPage;
 import org.openqa.selenium.InvalidElementStateException;
@@ -11,20 +12,10 @@ import java.net.MalformedURLException;
 import java.rmi.UnexpectedException;
 import java.util.UUID;
 
-public class ExampleTestCase extends TestBase {
+public class LoginPageTest extends TestBase {
 
     @org.testng.annotations.Test(dataProvider = "hardCodedBrowsers")
-    public void goToLandingPage(String browser, String version, String os, Method method)
-            throws MalformedURLException, InvalidElementStateException, UnexpectedException {
-    	
-        this.createDriver(browser, version, os, method.getName());
-        WebDriver driver = this.getWebDriver();
-        
-        Assert.assertTrue(LandingPage.visitPage(driver).isLoaded());
-    }
-
-    @org.testng.annotations.Test(dataProvider = "hardCodedBrowsers")
-    public void goToLoginPage(String browser, String version, String os, Method method)
+    public void checkLoginPageIsAccessible(String browser, String version, String os, Method method)
             throws MalformedURLException, InvalidElementStateException, UnexpectedException {
     	
         this.createDriver(browser, version, os, method.getName());
@@ -36,7 +27,7 @@ public class ExampleTestCase extends TestBase {
     }    
     
     @org.testng.annotations.Test(dataProvider = "hardCodedBrowsers")
-    public void loginWithValidCredentials(String browser, String version, String os, Method method)
+    public void checkLoginWithValidCredentialsSucceeds(String browser, String version, String os, Method method)
             throws MalformedURLException, InvalidElementStateException, UnexpectedException {
     	
         this.createDriver(browser, version, os, method.getName());
@@ -49,4 +40,18 @@ public class ExampleTestCase extends TestBase {
         Assert.assertTrue(loginPage.isSuccessMessageDisplayed());
     }
 
+    @org.testng.annotations.Test(dataProvider = "hardCodedBrowsers")
+    public void checkLoginWithInvalidCredentialsFails(String browser, String version, String os, Method method)
+            throws MalformedURLException, InvalidElementStateException, UnexpectedException {
+    	
+        this.createDriver(browser, version, os, method.getName());
+        WebDriver driver = this.getWebDriver();
+
+        LandingPage.visitPage(driver).loginPageLink.click();
+        
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.attemptLogin("foo", "bar");
+        Assert.assertTrue(loginPage.isFailureMessageDisplayed());
+    }
+    
 }

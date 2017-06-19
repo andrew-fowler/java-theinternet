@@ -1,5 +1,7 @@
 package com.testautomationlabs.Model;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,27 +9,21 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LandingPage {
+public class CheckboxesPage {
 
-    @FindBy(xpath = "//a[@href='/login']")
-    public WebElement loginPageLink;
-
-    @FindBy(xpath = "//a[@href='/checkboxes']")
-    public WebElement checkboxPageLink;
-    
-    @FindBy(xpath = "//h1[contains(.,'Welcome to the Internet')]")
-    private WebElement header;
+    @FindBy(xpath = "//input[@type='checkbox']")
+    public List<WebElement> checkboxes;
     
     public WebDriver driver;
-    public static String url = "https://the-internet.herokuapp.com/";
+    public static String url = "https://the-internet.herokuapp.com/checkboxes";
 
-    public static LandingPage visitPage(WebDriver driver) {
-    	LandingPage page = new LandingPage(driver);
+    public static CheckboxesPage visitPage(WebDriver driver) {
+    	CheckboxesPage page = new CheckboxesPage(driver);
         page.visitPage();
         return page;
     }
 
-    public LandingPage(WebDriver driver) {
+    public CheckboxesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -37,6 +33,6 @@ public class LandingPage {
     }
     
     public boolean isLoaded(){
-    	return header.isDisplayed();
+    	return checkboxes.size() == 2;
     }
 }

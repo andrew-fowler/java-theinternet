@@ -27,8 +27,8 @@ public class LoginPage {
     public WebDriver driver;
     public static String url = "https://the-internet.herokuapp.com/login";
 
-    public static LandingPage visitPage(WebDriver driver) {
-    	LandingPage page = new LandingPage(driver);
+    public static LoginPage visitPage(WebDriver driver) {
+    	LoginPage page = new LoginPage(driver);
         page.visitPage();
         return page;
     }
