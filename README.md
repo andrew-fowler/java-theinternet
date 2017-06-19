@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/andrew-fowler/java-theinternet/tree/master.svg?style=svg)](https://circleci.com/gh/andrew-fowler/java-theinternet/tree/master)
+
 ###Getting Started
 
 ```
@@ -17,4 +19,3 @@ $$$ Execution
 ```
 $ mvn test
 ```
-
