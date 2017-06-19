@@ -1,0 +1,7 @@
+machine:
+  java:
+    version: openjdk7
+
+test:
+  override:
+    - if [[ ! -z $CI_PULL_REQUEST ]] ; then echo "IMA PR!" ; fi
